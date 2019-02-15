@@ -22,7 +22,10 @@ One of the screens contained a custom UISwitch, this was one of the first things
 
 **CocoaPods**
 
-- TODO: Pod Installation
+Add to your podfile
+```
+pod 'CustomSwitch', '~> 0.1'
+```
 
 
 ## How to use
