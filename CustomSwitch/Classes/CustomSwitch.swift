@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 @IBDesignable
-class CustomSwitch: UIControl {
+public class CustomSwitch: UIControl {
 
     @IBInspectable
     public var onTintColor: UIColor = UIColor(red: 208/255, green: 208/255, blue: 208/255, alpha: 1.0) {
@@ -169,7 +169,7 @@ class CustomSwitch: UIControl {
     //
     // Manage touch events on UIControl
     //
-    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+    override open func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         super.beginTracking(touch, with: event)
 
         self.animate()
