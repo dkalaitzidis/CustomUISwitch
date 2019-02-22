@@ -3,7 +3,7 @@ A custom UIControl class to use as UISwitch from Storyboards or Code.
 
 # Why CustomUISwitch
 
-Hi! Recently i got some mockups for a new iOS from our product designer at **Orfium** (https://www.orfium.com). 
+Hi! Recently i got some mockups for a new iOS from our ninja at **Orfium** (https://www.orfium.com) whose identity shall be kept hidden. 
 
 One of the screens contained a custom UISwitch, this was one of the first things that i started to work on ;)
 
