@@ -41,7 +41,12 @@ pod 'CustomSwitch', '~> 0.1'
 let myCustomSwitch = CustomSwitch(frame: CGRect(x: 50, y: 50, width: 48, height: 14))
 self.view.addSubview(myCustomSwitch)
 ```
-
+- Get Switch value (on/off):
+```
+myCustomSwitch.isOn { (value) in
+  print(value)
+}
+```
 
 **Available Properties**
 
