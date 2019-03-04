@@ -68,7 +68,11 @@ public class CustomSwitch: UIControl {
         }
     }
 
-    public var isOn: Bool = true
+    public var isOn: Bool = true {
+        didSet {
+            process(with: isOn)
+        }
+    }
     public var animationDuration: Double = 0.5
     fileprivate var cornerRadius: CGFloat = 0.5
     fileprivate var thumbCornerRadius: CGFloat = 0.5
@@ -78,10 +82,12 @@ public class CustomSwitch: UIControl {
     fileprivate var onPoint: CGPoint = .zero
     fileprivate var offPoint: CGPoint = .zero
     fileprivate var isAnimating: Bool = false
+    fileprivate var isOnHandler: ((Bool) -> Void)?
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.setupUI()
+
     }
 
     override init(frame: CGRect) {
@@ -153,11 +159,11 @@ public class CustomSwitch: UIControl {
                        initialSpringVelocity: 0.5,
                        options: [.curveEaseOut,.beginFromCurrentState],
                        animations: {
-                            self.thumbView.frame.origin.x = self.isOn ? self.onPoint.x : self.offPoint.x
-                            self.thumbImageView.center.x = self.thumbView.center.x
-                            self.backgroundColor = self.isOn ? self.onTintColor : self.offTintColor
-                            self.thumbView.backgroundColor = self.isOn ? self.thumbOnTintColor : self.thumbOffTintColor
-                            self.thumbImageView.image = self.isOn ? UIImage(named: self.isOnImage) : UIImage(named: self.isOffImage)
+                        self.thumbView.frame.origin.x = self.isOn ? self.onPoint.x : self.offPoint.x
+                        self.thumbImageView.center.x = self.thumbView.center.x
+                        self.backgroundColor = self.isOn ? self.onTintColor : self.offTintColor
+                        self.thumbView.backgroundColor = self.isOn ? self.thumbOnTintColor : self.thumbOffTintColor
+                        self.thumbImageView.image = self.isOn ? UIImage(named: self.isOnImage) : UIImage(named: self.isOffImage)
 
         }, completion: { [weak self] _ in
             self?.isAnimating = false
@@ -167,14 +173,25 @@ public class CustomSwitch: UIControl {
     }
 
     //
+    // Create closure to get isOn value
+    //
+    func isOn(handler: @escaping (_ value: Bool) -> Void) {
+        isOnHandler = handler
+    }
+
+    private func process(with value:Bool) {
+        if let isOn = isOnHandler {
+            isOn(value)
+        }
+    }
+
+    //
     // Manage touch events on UIControl
     //
     override open func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         super.beginTracking(touch, with: event)
-
         self.animate()
         return true
     }
-
 
 }
