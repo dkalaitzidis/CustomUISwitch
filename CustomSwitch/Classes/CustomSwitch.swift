@@ -175,7 +175,7 @@ public class CustomSwitch: UIControl {
     //
     // Create closure to get isOn value
     //
-    func isOn(handler: @escaping (_ value: Bool) -> Void) {
+   public func isOn(handler: @escaping (_ value: Bool) -> Void) {
         isOnHandler = handler
     }
 
